@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
+import { StarsComponent } from './stars/stars.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ProductComponent } from './product/product.component';
     FooterComponent,
     SearchComponent,
     CarouselComponent,
-    ProductComponent
+    ProductComponent,
+    StarsComponent
   ],
   imports: [
     BrowserModule
