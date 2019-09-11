@@ -1,6 +1,6 @@
 <div *ngFor="let product of products" class="col-md-4 col-sm-4 col-lg-4 product-col">
   <div class="card">
-    <img class="card-img-top" src="../../assets/320x150.png">
+    <img class="card-img-top" [src]="imgUrl">
     <div class="card-body cardBodyEqualSize">
       <h4 class="float-right">{{product.price}}元</h4>
       <h4 class="card-title cardTitleEqualSize">{{product.title}}</h4>
