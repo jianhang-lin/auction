@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StarsComponent implements OnInit {
 
+  private stars: boolean[];
+
   constructor() { }
 
   ngOnInit() {
+    this.stars = [true, true, true, true, true];
   }
 
 }
