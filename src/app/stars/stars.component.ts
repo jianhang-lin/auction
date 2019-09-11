@@ -15,7 +15,10 @@ export class StarsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.stars = ['farstar', 'fasstar', 'farstar', 'farstar', 'fabgithub'];
+    this.stars = [];
+    for (let i = 1; i <= 5; i++) {
+      this.stars.push(i > this.rating ? 'farstar' : 'fasstar');
+    }
   }
 
 }
