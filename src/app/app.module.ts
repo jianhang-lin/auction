@@ -15,6 +15,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
 import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { HomeComponent } from './home/home.component';
 
 library.add(fas, far, fab);
 @NgModule({
@@ -26,7 +27,8 @@ library.add(fas, far, fab);
     CarouselComponent,
     ProductComponent,
     StarsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
