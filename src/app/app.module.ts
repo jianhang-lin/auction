@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +18,17 @@ import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
 
+const routeConfig: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'product/:prodTitle',
+    component: ProductDetailComponent
+  }
+];
+
 library.add(fas, far, fab);
 @NgModule({
   declarations: [
@@ -31,6 +43,7 @@ library.add(fas, far, fab);
     HomeComponent
   ],
   imports: [
+    RouterModule.forRoot(routeConfig),
     BrowserModule,
     FormsModule,
     FontAwesomeModule
