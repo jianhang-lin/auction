@@ -3,7 +3,7 @@
     <img class="card-img-top" [src]="imgUrl">
     <div class="card-body cardBodyEqualSize">
       <h4 class="float-right">{{product.price}}元</h4>
-      <h4 class="card-title cardTitleEqualSize"><a [routerLink]="['/product', product.title]">{{product.title}}</a></h4>
+      <h4 class="card-title cardTitleEqualSize"><a [routerLink]="['/product', product.id]">{{product.title}}</a></h4>
       <p class="card-text cardTextEqualSize">{{product.desc}}</p>
     </div>
     <div>
