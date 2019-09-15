@@ -17,6 +17,7 @@ import { ProductComponent } from './product/product.component';
 import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
+import { ProductService } from './shared/product.service';
 
 const routeConfig: Routes = [
   {
@@ -48,7 +49,7 @@ library.add(fas, far, fab);
     FormsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
