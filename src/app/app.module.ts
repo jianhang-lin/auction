@@ -18,6 +18,7 @@ import { StarsComponent } from './stars/stars.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { HomeComponent } from './home/home.component';
 import { ProductService } from './shared/product.service';
+import { FilterPipe } from './pipe/filter.pipe';
 
 const routeConfig: Routes = [
   {
@@ -41,7 +42,8 @@ library.add(fas, far, fab);
     ProductComponent,
     StarsComponent,
     ProductDetailComponent,
-    HomeComponent
+    HomeComponent,
+    FilterPipe
   ],
   imports: [
     RouterModule.forRoot(routeConfig),
