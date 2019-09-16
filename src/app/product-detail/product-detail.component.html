@@ -5,5 +5,23 @@
     <h4>{{product.title}}</h4>
     <p>{{product.desc}}</p>
   </div>
+  <div>
+    <p class="fa-pull-right">{{comments.length}}</p>
+    <p>
+      <app-stars [rating]="product.rating"></app-stars>
+    </p>
+  </div>
+</div>
 
+<div class="well">
+  <div class="row" *ngFor="let comment of comments">
+    <hr>
+    <div class="col-md-12">
+      <app-stars [rating]="comment.rating"></app-stars>
+      <span>{{comment.user}}</span>
+      <span class="fa-pull-right">{{comment.timestamp}}</span>
+      <p></p>
+      <span>{{comment.content}}</span>
+    </div>
+  </div>
 </div>
