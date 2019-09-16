@@ -10,6 +10,8 @@ export class ProductComponent implements OnInit {
 
   private products: Product[];
 
+  private keyword: string;
+
   private imgUrl = '../../assets/320x150.png';
 
   constructor(
