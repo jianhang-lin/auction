@@ -14,6 +14,10 @@ export class ProductDetailComponent implements OnInit {
 
   comments: Comment[];
 
+  newRating = 5;
+
+  newComment = '';
+
   constructor(
     private routeInfo: ActivatedRoute,
     private productService: ProductService
