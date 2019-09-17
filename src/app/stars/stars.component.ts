@@ -31,6 +31,7 @@ export class StarsComponent implements OnInit {
     if (!this.readonly) {
       this.rating = index + 1;
       this.ngOnInit();
+      this.ratingChange.emit(this.rating);
     }
   }
 }
