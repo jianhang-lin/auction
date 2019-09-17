@@ -18,6 +18,8 @@ export class ProductDetailComponent implements OnInit {
 
   newComment = '';
 
+  isCommentHidden = true;
+
   constructor(
     private routeInfo: ActivatedRoute,
     private productService: ProductService
