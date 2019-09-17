@@ -34,5 +34,8 @@ export class ProductDetailComponent implements OnInit {
   addCommoent() {
     const comment = new Comment(0, this.product.id, new Date().toISOString(), 'someone', this.newRating, this.newComment);
     this.comments.unshift(comment);
+    this.newComment = null;
+    this.newRating = 5;
+    this.isCommentHidden = true;
   }
 }
