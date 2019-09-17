@@ -29,4 +29,8 @@ export class ProductDetailComponent implements OnInit {
     this.comments = this.productService.getCommentsForProductId(productId);
   }
 
+  addCommoent() {
+    const comment = new Comment(0, this.product.id, new Date().toISOString(), 'someone', this.newRating, this.newComment);
+    this.comments.unshift(comment);
+  }
 }
