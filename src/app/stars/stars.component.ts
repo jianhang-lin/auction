@@ -12,6 +12,7 @@ export class StarsComponent implements OnInit {
 
   private stars: string[];
 
+  @Input()
   private readonly = true;
 
   constructor() { }
