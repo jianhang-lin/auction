@@ -21,6 +21,9 @@
     <div>
       <textarea [(ngModel)]="newComment"></textarea>
     </div>
+    <div>
+      <button class="btn" (click)="addCommoent()"></button>
+    </div>
   </div>
   <div class="row" *ngFor="let comment of comments">
     <hr>
