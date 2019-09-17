@@ -1,4 +1,4 @@
 <p>
-  <fa-icon [icon]="[star.substr(0,3), star.substr(3,star.length)]" *ngFor="let star of stars"></fa-icon>
+  <fa-icon [icon]="[star.substr(0,3), star.substr(3,star.length)]" *ngFor="let star of stars; let i = index;" (click)="clickStar(i)"></fa-icon>
   <span>{{rating}}星</span>
 </p>
