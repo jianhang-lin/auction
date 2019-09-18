@@ -33,4 +33,8 @@ export class SearchComponent implements OnInit {
       return {positiviNumber: true};
     }
   }
+
+  onSearch() {
+
+  }
 }
