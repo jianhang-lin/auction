@@ -39,6 +39,8 @@ export class SearchComponent implements OnInit {
   }
 
   onSearch() {
-
+    if (this.formModel.valid) {
+      console.log(this.formModel.value);
+    }
   }
 }
