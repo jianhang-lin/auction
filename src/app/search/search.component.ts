@@ -14,8 +14,8 @@ export class SearchComponent implements OnInit {
     const fb = new FormBuilder();
     this.formModel = fb.group({
       title: ['', Validators.minLength(3)],
-      price: [null, ],
-      category: []
+      price: [null, this.positiveNumberValidator],
+      category: ['-1']
     });
   }
 
