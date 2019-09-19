@@ -2,9 +2,11 @@ package work.jianhang.server.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import work.jianhang.server.service.AuctionService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,9 @@ import java.util.Map;
 
 @Slf4j
 public class AuctionHandler extends TextWebSocketHandler {
+
+    @Autowired
+    private AuctionService auctionService;
 
     private static Map<Object, List<Integer>> subscription = new HashMap<>();
 
