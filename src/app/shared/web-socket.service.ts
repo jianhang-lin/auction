@@ -8,18 +8,19 @@ export class WebSocketService {
 
   constructor() {}
 
-  createObservalbeSocket(url: string): Observable<any> {
+  createObservalbeSocket(url: string, id: number): Observable<any> {
     this.ws = new WebSocket(url);
     return new Observable(
       observer => {
         this.ws.onmessage = (event) => observer.next(event.data);
         this.ws.onerror = (event) => observer.next(event);
         this.ws.onclose = (event) => observer.complete();
+        this.ws.onopen = (event) => this.sendMessage({productId: id});
       }
     );
   }
 
-  sendMessage(message: string) {
-    this.ws.send(message);
+  sendMessage(message: any) {
+    this.ws.send(JSON.stringify(message));
   }
 }

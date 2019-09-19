@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductService } from '../shared/product.service';
 import { Comment } from '../shared/product.service';
+import { WebSocketService } from '../shared/web-socket.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -26,7 +27,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private routeInfo: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private wsService: WebSocketService
     ) { }
 
   ngOnInit() {
@@ -55,5 +57,6 @@ export class ProductDetailComponent implements OnInit {
 
   watchProduct() {
     this.isWatched = !this.isWatched;
+    this.wsService.createObservalbeSocket('ws://127.0.0.1:8080', this.product.id).subscribe();
   }
 }
