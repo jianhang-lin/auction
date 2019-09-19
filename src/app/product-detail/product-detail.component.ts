@@ -20,6 +20,10 @@ export class ProductDetailComponent implements OnInit {
 
   isCommentHidden = true;
 
+  isWatched = false;
+
+  currentBid: number;
+
   constructor(
     private routeInfo: ActivatedRoute,
     private productService: ProductService
@@ -28,7 +32,10 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     const productId: number = this.routeInfo.snapshot.params.productId;
     this.productService.getProduct(productId).subscribe(
-      product => this.product = product
+      product => {
+        this.product = product;
+        this.currentBid = product.price;
+      }
     );
     this.productService.getCommentsForProductId(productId).subscribe(
       comments => this.comments = comments
@@ -44,5 +51,9 @@ export class ProductDetailComponent implements OnInit {
     this.newComment = null;
     this.newRating = 5;
     this.isCommentHidden = true;
+  }
+
+  watchProduct() {
+    this.isWatched = !this.isWatched;
   }
 }
