@@ -53,10 +53,8 @@ export class ProductService {
   }
 
   search(params: ProductSearchParams): Observable<Product[]> {
-    const httpParmas = new HttpParams();
-    Object.keys(params).filter(key => params[key]).forEach(key => {
-      httpParmas.set(key, params[key]);
-    });
+    console.log('params:' + params.title);
+    const httpParmas = new HttpParams().set('title', params.title).set('price', String(params.price)).set('category', params.category);
     return this.http.get<Product[]>(this.baseUrl + '/api/products', {params: httpParmas}).pipe(
       tap(_ => this.log(`fetched products`)),
       catchError(this.handleError<Product[]>('getProducts', []))
