@@ -1,40 +1,53 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private products: Product[] = [
-    new Product(1, '第一个商品', 1.99, 3.5, '这是第一个商品', ['电子产品', '硬件设备']),
-    new Product(2, '第二个商品', 1.99, 1.5, '这是第二个商品', ['电子产品', '硬件设备']),
-    new Product(3, '第三个商品', 2.99, 3.5, '这是第三个商品', ['硬件设备']),
-    new Product(4, '第四个商品', 6.99, 2.5, '这是第四个商品', ['软件设备']),
-    new Product(5, '第五个商品', 9.99, 3.5, '这是第五个商品', ['电子产品', '硬件设备']),
-    new Product(6, '第六个商品', 11.99, 4.5, '这是第六个商品', ['图书'])
-  ];
-  private comments: Comment[] = [
-    new Comment(1, 1, '2017-02-02 22:22:22', '张三', 3, '东西不错'),
-    new Comment(2, 1, '2017-03-03 22:22:22', '李四', 4, '东西还不错'),
-    new Comment(3, 1, '2017-04-04 22:22:22', '王五', 2, '东西不错'),
-    new Comment(4, 2, '2017-05-05 22:22:22', '赵六', 4, '东西不错'),
-  ];
-  constructor() { }
+  private baseUrl = 'http://localhost:8080';
+
+  constructor(private http: HttpClient ) { }
 
   getAllCategories(): string[] {
     return ['电子产品', '硬件设备', '软件设备', '图书'];
   }
 
-  getProducts(): Product[] {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + '/api/products').pipe(
+      tap(_ => this.log(`fetched products`)),
+      catchError(this.handleError<Product[]>('getProducts', []))
+    );
   }
 
-  getProduct(id: number): Product {
-    return this.products.find((product) => product.id === Number(id));
+  getProduct(id: number): Observable<Product> {
+    const url = `${this.baseUrl}/api/product/${id}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => this.log(`fetched Product id = ${id}`)),
+      catchError(this.handleError<Product>(`getProduct id = ${id}`))
+    );
   }
 
-  getCommentsForProductId(id: number): Comment[] {
-    return this.comments.filter((comment: Comment) => comment.productId === Number(id));
+  getCommentsForProductId(id: number): Observable<Comment[]> {
+    const url = `${this.baseUrl}/api/product/${id}/comments`;
+    return this.http.get<Comment[]>(url).pipe(
+      tap(_ => this.log(`fetched Comments by ProductId = ${id}`)),
+      catchError(this.handleError<Comment[]>(`getCommentsForProductId id = ${id}`, []))
+    );
+  }
+
+  private log(message: string) {
+    console.log(`ProductService: ${message}`);
+  }
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 }
 export class Product {
