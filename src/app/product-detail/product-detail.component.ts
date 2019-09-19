@@ -57,6 +57,12 @@ export class ProductDetailComponent implements OnInit {
 
   watchProduct() {
     this.isWatched = !this.isWatched;
-    this.wsService.createObservalbeSocket('ws://127.0.0.1:8080', this.product.id).subscribe();
+    this.wsService.createObservalbeSocket('ws://127.0.0.1:8080/actionHandler', this.product.id).subscribe(
+      products => {
+        if (products.productId === this.product.id) {
+          this.currentBid = products.bid;
+        }
+      }
+    );
   }
 }
