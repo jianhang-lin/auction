@@ -15,6 +15,8 @@ public class AuctionHandler extends TextWebSocketHandler {
 
     private static Map<Object, List<Integer>> subscription = new HashMap<>();
 
+    private static Map<Integer, Float> currentBids = new HashMap<>();
+
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
