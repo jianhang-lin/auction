@@ -26,12 +26,12 @@ public class AuctionController {
         return "Hello Auction";
     }
 
-    @GetMapping("/products")
+    @GetMapping("/api/products")
     public List<Product> getProducts() {
         return products;
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/api/product/{id}")
     public Product getProductById(@PathVariable int id) {
         return products.stream().filter(p -> p.getId() == id).findFirst().get();
     }
