@@ -1,12 +1,14 @@
 package work.jianhang.server.controller;
 
 import com.google.common.collect.Lists;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import work.jianhang.server.entity.Comment;
 import work.jianhang.server.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,8 +36,20 @@ public class AuctionController {
     }
 
     @GetMapping("/api/products")
-    public List<Product> getProducts() {
-        return products;
+    public List<Product> getProducts(@RequestParam(required = false) String title,
+                                     @RequestParam(required = false) String price,
+                                     @RequestParam(required = false) String category) {
+        List<Product> result = products;
+        if (!StringUtils.isEmpty(title) && !Objects.equals("null", title)) {
+            result = result.stream().filter(p -> p.getTitle().indexOf(title) != -1).collect(Collectors.toList());
+        }
+        if (!StringUtils.isEmpty(price) && !Objects.equals("null", price) && result.size() > 0) {
+            result = result.stream().filter(p -> p.getPrice() <= Float.parseFloat(price)).collect(Collectors.toList());
+        }
+        if (!Objects.equals("-1", category) && result.size() > 0) {
+            result = result.stream().filter(p -> p.getCategories().contains(category)).collect(Collectors.toList());
+        }
+        return result;
     }
 
     @GetMapping("/api/product/{id}")
