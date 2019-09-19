@@ -46,7 +46,7 @@ public class AuctionController {
         if (!StringUtils.isEmpty(price) && !Objects.equals("null", price) && result.size() > 0) {
             result = result.stream().filter(p -> p.getPrice() <= Float.parseFloat(price)).collect(Collectors.toList());
         }
-        if (!Objects.equals("-1", category) && result.size() > 0) {
+        if (!StringUtils.isEmpty(category) && !Objects.equals("-1", category) && !Objects.equals("null", category) && result.size() > 0) {
             result = result.stream().filter(p -> p.getCategories().contains(category)).collect(Collectors.toList());
         }
         return result;
