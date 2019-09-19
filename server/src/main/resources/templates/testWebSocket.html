@@ -19,7 +19,7 @@
 
         function connectWebSocket() {
             console.log("begin...")
-            websocket = new WebSocket("ws://127.0.0.1/actionHandler/ID="+userId);
+            websocket = new WebSocket("ws://127.0.0.1:8080/actionHandler/ID="+userId);
 
             websocket.onopen = function () {
                 console.log("open..")
@@ -37,7 +37,7 @@
         function send() {
             var postValue = {};
             postValue.id = userId;
-            postValue.message=$("#test").val();
+            postValue.message=$("#text").val();
             websocket.send(JSON.stringify(postValue));
         }
 

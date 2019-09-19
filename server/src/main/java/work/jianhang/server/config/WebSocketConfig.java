@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(auctionHandler(), "actionHandler/{ID}");
+        webSocketHandlerRegistry.addHandler(auctionHandler(), "actionHandler/{ID}").setAllowedOrigins("*");
     }
 
     public WebSocketHandler auctionHandler() {
