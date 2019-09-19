@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -49,6 +49,24 @@ export class ProductService {
       return of(result as T);
     };
   }
+
+  search(params: ProductSearchParams): Observable<Product[]> {
+    const httpParmas = new HttpParams();
+    Object.keys(params).filter(key => params[key]).forEach(key => {
+      httpParmas.set(key, params[key]);
+    });
+    return this.http.get<Product[]>(this.baseUrl + '/api/products', {params: httpParmas}).pipe(
+      tap(_ => this.log(`fetched products`)),
+      catchError(this.handleError<Product[]>('getProducts', []))
+    );
+  }
+
+  private encodeParams(params: ProductSearchParams) {
+    return Object.keys(params).filter(key => params[key]).reduce((sum: URLSearchParams, key: string) => {
+      sum.append(key, params[key]);
+      return sum;
+    }, new URLSearchParams());
+  }
 }
 export class Product {
 
@@ -70,4 +88,12 @@ export class Comment {
     public rating: number,
     public content: string
   ) {}
+}
+export class ProductSearchParams {
+  constructor(public title: string,
+              public price: number,
+              public category: string) {
+
+  }
+
 }
