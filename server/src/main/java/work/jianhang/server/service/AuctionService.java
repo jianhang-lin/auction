@@ -10,4 +10,5 @@ public interface AuctionService {
     List<Product> getAllProducts();
 
     List<Comment> getAllComments();
+
 }

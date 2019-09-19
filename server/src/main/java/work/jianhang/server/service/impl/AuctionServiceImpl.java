@@ -2,12 +2,15 @@ package work.jianhang.server.service.impl;
 
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.WebSocketSession;
 import work.jianhang.server.entity.Comment;
 import work.jianhang.server.entity.Product;
 import work.jianhang.server.service.AuctionService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -30,7 +33,6 @@ public class AuctionServiceImpl implements AuctionService {
 
     @Override
     public List<Product> getAllProducts() {
-
         return products;
     }
 
@@ -38,4 +40,5 @@ public class AuctionServiceImpl implements AuctionService {
     public List<Comment> getAllComments() {
         return comments;
     }
+
 }
