@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input id="text" type="text">
+    <button onclick="send()">Send</button>
+    <button onclick="closeWebSocket()">Close</button>
+    <div id="message"></div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        var userId = "888";
+        var websocket = null;
+        $(function () {
+            connectWebSocket();
+        });
+
+        function connectWebSocket() {
+            console.log("begin...")
+            websocket = new WebSocket("ws://127.0.0.1/actionHandler/ID="+userId);
+
+            websocket.onopen = function () {
+                console.log("open..")
+            }
+
+            websocket.onclose = function() {
+                console.log("close..")
+            }
+
+            websocket.onmessage = function (msg) {
+                console.log(msg.data);
+            }
+        }
+
+        function send() {
+            var postValue = {};
+            postValue.id = userId;
+            postValue.message=$("#test").val();
+            websocket.send(JSON.stringify(postValue));
+        }
+
+        function closeWebSocket() {
+            if (websocket != null) {
+                websocket.close();
+            }
+        }
+    </script>
+</body>
+</html>
