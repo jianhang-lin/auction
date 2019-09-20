@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductService } from './shared/product.service';
 import { FilterPipe } from './pipe/filter.pipe';
 import {WebSocketService} from './shared/web-socket.service';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 const routeConfig: Routes = [
   {
@@ -55,7 +56,8 @@ library.add(fas, far, fab);
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ProductService, WebSocketService],
+  providers: [ProductService, WebSocketService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
