@@ -17,6 +17,7 @@ export class WebSocketService {
         this.ws.onerror = (event) => observer.next(String(event));
         this.ws.onclose = (event) => observer.complete();
         this.ws.onopen = (event) => this.sendMessage({productId: id});
+        return () => this.ws.close();
       }
     ).pipe(map(message => JSON.parse(message)));
   }
