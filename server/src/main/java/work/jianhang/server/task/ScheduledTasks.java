@@ -34,7 +34,9 @@ public class ScheduledTasks {
             Float newBid = currentBid + new Random().nextFloat()*5;
             currentBids.put(p.getId(), newBid);
 
-            for(Map.Entry<WebSocketSession, List<Integer>> entry : subscription.entrySet()) {
+            Iterator<Map.Entry<WebSocketSession, List<Integer>>> iterator = subscription.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<WebSocketSession, List<Integer>> entry = iterator.next();
                 List<Integer> ids = entry.getValue();
                 for (Integer i : ids) {
                     if (i == p.getId()) {
@@ -42,13 +44,16 @@ public class ScheduledTasks {
                         newBids.put("productId", p.getId());
                         newBids.put("bid", currentBids.get(p.getId()));
                         try {
-                            entry.getKey().sendMessage(new TextMessage(JSONObject.toJSONString(newBids)));
+                            if (entry.getKey().isOpen()) {
+                                entry.getKey().sendMessage(new TextMessage(JSONObject.toJSONString(newBids)));
+                            } else {
+                                iterator.remove();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }
-
             }
         }
 
