@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product, ProductService } from '../shared/product.service';
 import { Comment } from '../shared/product.service';
 import { WebSocketService } from '../shared/web-socket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -24,6 +25,8 @@ export class ProductDetailComponent implements OnInit {
   isWatched = false;
 
   currentBid: number;
+
+  subscription: Subscription;
 
   constructor(
     private routeInfo: ActivatedRoute,
@@ -56,13 +59,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   watchProduct() {
-    this.isWatched = !this.isWatched;
-    this.wsService.createObservalbeSocket('ws://127.0.0.1:8080/actionHandler', this.product.id).subscribe(
-      products => {
-        if (products.productId === this.product.id) {
-          this.currentBid = products.bid;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.isWatched = false;
+      this.subscription = null;
+    } else {
+      this.isWatched = true;
+      this.subscription = this.wsService.createObservalbeSocket('ws://127.0.0.1:8080/actionHandler', this.product.id).subscribe(
+        products => {
+          if (products.productId === this.product.id) {
+            this.currentBid = products.bid;
+          }
         }
-      }
-    );
+      );
+    }
   }
 }
