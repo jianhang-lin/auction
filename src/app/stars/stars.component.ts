@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   templateUrl: './stars.component.html',
   styleUrls: ['./stars.component.css']
 })
-export class StarsComponent implements OnInit, OnChanges{
+export class StarsComponent implements OnInit, OnChanges {
 
   @Input()
   private rating: number;
